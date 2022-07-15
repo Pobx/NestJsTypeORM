@@ -17,8 +17,8 @@ export const typeOrmAsyncConfig: TypeOrmModuleAsyncOptions = {
       username: configService.get('DATABASE_USERNAME'),
       password: configService.get('DATABASE_PASSWORD'),
       database: configService.get('DATABASE_NAME'),
-      entities: [__dirname + '/../dist/**/*.entity.{js,ts}'],
-      migrations: [__dirname + '/../dist/migrations/*{.ts,.js}'],
+      entities: [__dirname + '/../**/*.entity.{js,ts}'],
+      // migrations: [__dirname + '/../migrations/*{.ts,.js}'],
       extra: {
         charset: 'utf8mb4_unicode_ci',
       },

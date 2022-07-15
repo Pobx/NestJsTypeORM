@@ -8,6 +8,7 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Query,
   ValidationPipe,
 } from '@nestjs/common';
 import { InsertPhotoDto } from './insert-photo.dto';
@@ -24,8 +25,8 @@ export class PhotoController {
     return await this.photoService.findAll();
   }
 
-  @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: number): Promise<PhotoEntity> {
+  @Get('by-id')
+  async findOne(@Query('id', ParseIntPipe) id: number): Promise<PhotoEntity> {
     return await this.photoService.findOne(id);
   }
 
@@ -36,17 +37,17 @@ export class PhotoController {
     return await this.photoService.insert(insertPhotoDto);
   }
 
-  @Put(':id')
+  @Put()
   async update(
-    @Param('id', ParseIntPipe) id,
+    @Query('id', ParseIntPipe) id: number,
     @Body(new ValidationPipe()) updatePhotoDto: UpdatePhotoDto,
   ): Promise<PhotoEntity> {
     return this.photoService.update(id, updatePhotoDto);
   }
 
-  @Delete(':id')
+  @Delete()
   @HttpCode(204)
-  async delete(@Param('id', ParseIntPipe) id): Promise<void> {
+  async delete(@Query('id', ParseIntPipe) id: number): Promise<void> {
     await this.photoService.delete(id);
   }
 }
